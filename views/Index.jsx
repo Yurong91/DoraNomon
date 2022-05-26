@@ -4,6 +4,7 @@ const DefaultLayout = require('./Layout/DefaultLayout');
 class Index extends React.Component {
     render() {
         const { categories } = this.props
+        const { products } = this.props
         return (
             <DefaultLayout title="DoraNomon" class='titleName'>
                 {/* <nav class="Index">
@@ -13,7 +14,7 @@ class Index extends React.Component {
                     Shop by Category
                 </h2>
                 <ul id="ul">
-                    <li id="toys"><a href="/categories/show"><img src="./images/toy2.jpg"></img><h3>Toys</h3></a></li>
+                    <li id="toys"><a href="/products/Toys"><img src="/images/toy2.jpg"></img><h3>Toys</h3></a></li>
                     <li id="CarrierBags">Carrier Bags</li>
                     <li id="Beds">Beds & Furniture</li>
                     <li id="Treats">Treats</li>

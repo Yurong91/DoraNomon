@@ -7,6 +7,30 @@ body {
     text-align: center;
 }
 
-#title {
+#ul {
+    display: grid;
+    /* gap: 1px; */
+    margin-top: 6%;
+    grid-template-columns: 250px 250px 250px 250px;
+    grid-template-rows: 200px 200px 200px 200px;
+    gap: 30px 30px;
+    justify-content: center;
+    /* cursor: pointer; */
+    
+}
+
+li {
+    list-style:none; 
+    background-color: lightgray; 
     text-align: center;
+
+}
+
+img {
+    /* background-image: src("./images/Toy.jpg"); */
+    /* background-color: aquamarine; */
+    margin-top: 10%;
+    width:150px;
+    height:120px;
+
 }
