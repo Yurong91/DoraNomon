@@ -1,16 +1,15 @@
 const React = require('react')
 const DefaultLayout = require("./layout/DefaultLayout")
 
-class Show extends React.Component {
+class ShowTwo extends React.Component {
     render() {
         // console.log(this.props.product)
-        const { categories } = this.props
-        const category = this.props.category
+        // const category = this.props.category
         const { products } = this.props
         // const product = this.props.product
         // console.log(products)
         return (
-            <DefaultLayout title="Shop for your cat" name="Show">
+            <DefaultLayout title="Shop for Carrier Bags" name="ShowTwo">
 
                 {/* <nav>
                    <h1>TOYS</h1>
@@ -62,4 +61,4 @@ class Show extends React.Component {
     }
 }
 
-module.exports = Show
+module.exports = ShowTwo

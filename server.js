@@ -6,7 +6,16 @@ const app = express()
 const PORT = 3000
 const Category = require('./Models/Category')
 const Product = require('./Models/Product')
-const res = require('express/lib/response')
+const path = require("path");
+const fs = require("fs");
+// const res = require('express/lib/response')
+const multer = require('multer')
+const upload = multer({
+    dest: "../public/Images",
+    fieldNameSize: 300,
+    limits:{fileSize:1048546 //10Mb
+    }
+});
 
 //======Connection to Database======
 connect(process.env.MONGO_URI, {
@@ -45,12 +54,22 @@ app.get('/products', (req, res) => {
 
 //New
 app.get('/products/new', (req, res) => {
+    
     res.render('New');
 });
 
 
 //Delete
-app.delete('/products/:id', (req, res) => {
+// app.delete('/products/:id', (req, res) => {
+//     Product.findByIdAndDelete(req.params.id, (err) => {
+//         if (!err) {
+//             res.status(200).redirect('/products')
+//         } else {
+//             res.status(400).json(err)
+//         }
+//     })
+// })
+app.delete('/products/:id', upload.single("img"), (req, res) => {
     Product.findByIdAndDelete(req.params.id, (err) => {
         if (!err) {
             res.status(200).redirect('/products')
@@ -61,21 +80,91 @@ app.delete('/products/:id', (req, res) => {
 })
 
 //Update
-app.put('/products/:id', (req, res) => {
-    Product.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updateProduct) => {
-        if (!err) {
-            res.status(200).redirect('/products')
-        } else {
-            res.status(400).json(err)
-        }
-    })
+app.put('/products/:id', upload.single("img"), (req, res) => {
+    if (req.file) {
+    const tempPath = req.file.path;
+    const fileExt = path.extname(req.file.originalname).toLocaleLowerCase();
+    //Remove special characters and more than one white space, also remove white space from start and end
+    const cleanName = (req.body.name).replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').trim();
+    //Removes white space from string
+    const cleanFileName = cleanName.replace(/\s/g, '');
+    const publicPath = "/images/"+cleanFileName+Date.now()+fileExt;
+    const localPath = "/public"+publicPath;
+    const targetPath = path.join(__dirname, localPath);
+    if(fileExt === ".png" || fileExt === ".jpg" ){
+        fs.rename(tempPath, targetPath, err => {
+            if (err){
+                res.status(400).json(err)
+            }else{
+                const fileDelete = path.join(__dirname, "/public"+req.body.img)
+                fs.unlink(fileDelete,  err => {
+                  console.log("File deleted.")
+                });
+                req.body.img = publicPath;
+                req.body.name = cleanName;
+                Product.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updateProduct) => {
+                    if (!err) {
+                        res.status(200).redirect("/products/"+req.body.category)
+                    } else {
+                        res.status(400).json(err)
+                    }
+                })
+            }  
+        });
+    }else{
+        fs.unlink(tempPath, err => {
+            err ? res.status(400).json(err) : res.status(200).json({"img":"Only PNG or JPG File."});
+        });
+    }
+
+    } else{
+        Product.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updateProduct) => {
+            if (!err) {
+                res.status(200).redirect("/products/"+req.body.category)
+            } else {
+                res.status(400).json(err)
+            }
+        })
+
+    }
+    
 })
 
 //Create
-app.post('/products', (req, res) => {
-    Product.create(req.body, (err, createProduct) => {
-        res.redirect('/products')
-    })
+app.post('/products', upload.single("img"), (req, res) => {
+    console.log(req.file)
+    console.log(req.body)
+    // Product.create(req.body, (err, createProduct) => {
+    //     // res.redirect('/products')
+    // })
+    const tempPath = req.file.path;
+    const fileExt = path.extname(req.file.originalname).toLocaleLowerCase();
+    //Remove special characters and more than one white space, also remove white space from start and end
+    const cleanName = (req.body.name).replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').trim();
+    //Removes white space from string
+    const cleanFileName = cleanName.replace(/\s/g, '');
+    const publicPath = "/images/"+cleanFileName+Date.now()+fileExt;
+    const localPath = "/public"+publicPath;
+    const targetPath = path.join(__dirname, localPath);
+    console.log(targetPath)
+    console.log(__dirname)
+    if(fileExt === ".png" || fileExt === ".jpg" ){
+        fs.rename(tempPath, targetPath, err => {
+            if (err){
+                res.status(400).json(err)
+            }else{
+                req.body.img = publicPath;
+                req.body.name = cleanName;
+                Product.create(req.body, (err, createdVpet) => {
+                    err ? res.send(err) : res.redirect("/products/"+req.body.category);  
+                })
+            }  
+        });
+    }else{
+        fs.unlink(tempPath, err => {
+            err ? res.status(400).json(err) : res.status(200).json({"img":"Only PNG or JPG File."});
+        });
+    }
 })
 
 //Edit
@@ -91,8 +180,25 @@ app.get('/products/:id/edit', (req, res) => {
 
 //Show
 app.get("/products/:category", (req, res) => {
-    Product.find({category: req.params.category}, (err, foundProduct)=> {
-        res.render('Show', {product: foundProduct})
+    // console.log(req.params.category)
+    Product.find({category: req.params.category}, (err, foundProducts)=> {
+        res.render('Show', {products: foundProducts})
+        // res.json(foundCategory)
+    })
+})
+
+// app.get("/products/:category", (req, res) => {
+//     // console.log(req.params.category)
+//     Product.find({category: req.params.category}, (err, foundProducts)=> {
+//         res.render('Show', {products: foundProducts})
+//         // res.json(foundCategory)
+//     })
+// })
+//Show2
+app.get("/products/:category", (req, res) => {
+    // console.log(req.params.category)
+    Product.find({category: req.params.category}, (err, foundProducts)=> {
+        res.render('ShowTwo', {products: foundProducts})
         // res.json(foundCategory)
     })
 })

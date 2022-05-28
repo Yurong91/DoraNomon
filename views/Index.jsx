@@ -10,18 +10,18 @@ class Index extends React.Component {
                 {/* <nav class="Index">
                     DoraNomon
                 </nav> */}
-                <h2 id = "shopByCategory">
+                <h1 id = "shopByCategory">
                     Shop by Category
-                </h2>
+                </h1>
                 <ul id="ul">
-                    <li id="toys"><a href="/products/Toys"><img src="/images/toy2.jpg"></img><h3>Toys</h3></a></li>
-                    <li id="CarrierBags">Carrier Bags</li>
-                    <li id="Beds">Beds & Furniture</li>
-                    <li id="Treats">Treats</li>
-                    <li id="Clothing">Clothing</li>
-                    <li id="Accessories">Accessories</li>
-                    <li id="food">Food</li>
-                    <li id="HealthCare">Health Care</li>
+                    <li><a href="/products/Toys"><img id="IndexImage" src="/images/toy2.jpg"></img><h3>Toys</h3></a></li>
+                    <li><a href="/products/Carrier Bags"><img id="IndexImage" src="/images/bag5.jpg"></img><h3>Carrier Bags</h3></a></li>
+                    <li><a href="/products/Beds"><img id="IndexImage" src="/images/bed2.jpg"></img><h3>Beds & Furniture</h3></a></li>
+                    <li><a href="/products/Treats"><img id="IndexImage" src="/images/treat1.jpg"></img><h3>Treats</h3></a></li>
+                    <li><a href="/products/Clothing"><img id="IndexImage" src="/images/clothes3.jpg"></img><h3>Clothing</h3></a></li>
+                    <li><a href="/products/Accessories"><img id="IndexImage" src="/images/accessory2.jpg"></img><h3>Accessories</h3></a></li>
+                    <li><a href="/products/Food"><img id="IndexImage" src="/images/food1.jpg"></img><h3>Food</h3></a></li>
+                    <li><a href="/products/Health Care"><img id="IndexImage" src="/images/care1.jpg"></img><h3>Health Care</h3></a></li>
                 </ul>
             </DefaultLayout>
         )

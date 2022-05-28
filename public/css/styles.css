@@ -26,11 +26,30 @@ li {
 
 }
 
-img {
+#IndexImage {
     /* background-image: src("./images/Toy.jpg"); */
     /* background-color: aquamarine; */
     margin-top: 10%;
     width:150px;
     height:120px;
+   
+}
 
+img {
+    width:250px;
+    height:250px;
+}
+
+#productList {
+    /* display:grid;
+    grid-template-columns: 400px 400px 400px 400px;
+    grid-template-rows: 400px 400px 400px 400px;
+    gap:10px 10px; */
+    width:400px;
+    height:400px;
+
+}
+
+#origFilePath {
+    display:none;
 }
