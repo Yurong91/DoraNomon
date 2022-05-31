@@ -16,7 +16,7 @@ class Index extends React.Component {
                 <ul id="ul">
                     <li><a href="/products/Toys"><img id="IndexImage" src="/images/toy2.jpg"></img><h3>Toys</h3></a></li>
                     <li><a href="/products/Carrier Bags"><img id="IndexImage" src="/images/bag5.jpg"></img><h3>Carrier Bags</h3></a></li>
-                    <li><a href="/products/Beds"><img id="IndexImage" src="/images/bed2.jpg"></img><h3>Beds & Furniture</h3></a></li>
+                    <li><a href="/products/Beds & Furniture"><img id="IndexImage" src="/images/bed2.jpg"></img><h3>Beds & Furniture</h3></a></li>
                     <li><a href="/products/Treats"><img id="IndexImage" src="/images/treat1.jpg"></img><h3>Treats</h3></a></li>
                     <li><a href="/products/Clothing"><img id="IndexImage" src="/images/clothes3.jpg"></img><h3>Clothing</h3></a></li>
                     <li><a href="/products/Accessories"><img id="IndexImage" src="/images/accessory2.jpg"></img><h3>Accessories</h3></a></li>

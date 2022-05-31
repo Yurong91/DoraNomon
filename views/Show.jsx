@@ -54,7 +54,7 @@ class Show extends React.Component {
                        )
                    }) 
                 }
-
+                 <button><a href="/products">Back</a></button>
 
 
             </DefaultLayout>

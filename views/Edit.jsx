@@ -30,6 +30,7 @@ module.exports = class Edit extends React.Component {
                   <input type="text" id="origFilePath" name="img" defaultValue={product.img}/>
                   <input type="submit" value="Create Product"/>
                 </form>
+                <button><a href="/products">Back</a></button>
 
             </DefaultLayout>
         )

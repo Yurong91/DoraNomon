@@ -18,10 +18,10 @@ module.exports = class New extends React.Component {
                       <option value="Carrier Bags">Carrier Bags</option>
                       <option value="Beds & Furniture">Beds & Furniture</option>
                       <option value="Treats">Treats</option>
-                      <option value="Clothingys">Clothing</option>
+                      <option value="Clothing">Clothing</option>
                       <option value="Accessories">Accessories</option>
                       <option value="Food">Food</option>
-                      <option value="THealth Care">Health Care</option>
+                      <option value="Health Care">Health Care</option>
                   </select>
                   <label htmlFor="img">image:</label>  
                   <input type="file"

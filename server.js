@@ -63,14 +63,14 @@ app.get('/products/new', (req, res) => {
 // app.delete('/products/:id', (req, res) => {
 //     Product.findByIdAndDelete(req.params.id, (err) => {
 //         if (!err) {
-//             res.status(200).redirect('/products')
+//             res.status(200).redirect('/products/category')
 //         } else {
 //             res.status(400).json(err)
 //         }
 //     })
 // })
-app.delete('/products/:id', upload.single("img"), (req, res) => {
-    Product.findByIdAndDelete(req.params.id, (err) => {
+app.delete('/products/:id', (req, res) => {
+    Product.findByIdAndDelete(req.params.id, (err,DeleteProduct) => {
         if (!err) {
             res.status(200).redirect('/products')
         } else {
@@ -78,6 +78,7 @@ app.delete('/products/:id', upload.single("img"), (req, res) => {
         }
     })
 })
+
 
 //Update
 app.put('/products/:id', upload.single("img"), (req, res) => {
